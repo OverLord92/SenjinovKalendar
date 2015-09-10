@@ -83,7 +83,7 @@ public class Kalendar {
 		Scanner input = new Scanner(System.in);
 		System.out.println("Enter reminder: ");
 		String reminderText = input.nextLine();
-		Reminder r = new Reminder("2", reminderText);
+		Reminder r = new Reminder(reminderText);
 		ReminderDAO.addReminder(r);
 		reminders.clear();
 		ReminderDAO.scanReminders();

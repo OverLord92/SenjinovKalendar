@@ -5,18 +5,13 @@ public class Reminder {
 	// Data Access Object for the Reminder class
 	static ReminderDAO reimnderDAO = new ReminderDAO();
 
-	private String id;
+	private int id;
 	private String text;
 	
 	
     /** Returns reminder id */
-	public String getId() {
+	public int getId() {
 		return id;
-	}
-
-	/** Sets a new reminder id */
-	public void setId(String id) {
-		this.id = id;
 	}
 	
 	/** Returns text of the reminder*/
@@ -34,14 +29,21 @@ public class Reminder {
 	}
 
 	/** Konstruktor with defined text */
-	public Reminder(String id, String text) {
+	public Reminder(String text) {
+		this.text = text;
+	}
+	
+	/** Konstruktor with defined text */
+	public Reminder(String text, int id) {
 		this.id = id;
 		this.text = text;
 	}
 	
+	
+	
 	/** Overriden toString method */
 	public String toString(){
-		return " *** " + id + " " + text;
+		return "  " + id + " " + text;
 	}
 
 }

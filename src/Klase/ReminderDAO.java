@@ -16,11 +16,12 @@ public class ReminderDAO {
 		Statement statement = connection.createStatement();
 		
 		// return reminders from database and place them in ResultSet
-		ResultSet result = statement.executeQuery("SELECT * FROM reminders");
+		ResultSet result = statement.executeQuery("SELECT * FROM reminder");
 		
 		// add reminders to reminder arrayList
 		while(result.next()){
-			Reminder r = new Reminder(result.getString(1), result.getString(2));
+			int reminder_id = Integer.parseInt(result.getString(2));
+			Reminder r = new Reminder(result.getString(1), reminder_id);
 			Kalendar.reminders.add(r);
 		}
 		
@@ -31,10 +32,9 @@ public class ReminderDAO {
 	public static void addReminder(Reminder r) throws SQLException{
 		
 		// PreparedStatement used to update database
-		PreparedStatement ps = connection.prepareStatement("insert into reminders values (?,?)");
+		PreparedStatement ps = connection.prepareStatement("insert into reminder(reminder_text) values (?)");
 		
-		ps.setString(1, r.getId());
-		ps.setString(2, r.getText());
+		ps.setString(1, r.getText());
 		ps.executeUpdate();
 	}
 
