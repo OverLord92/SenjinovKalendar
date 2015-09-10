@@ -1,63 +1,47 @@
 package Klase;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Reminder {
 
-	// file u koji smjestamo remindere
-	public static File file = new File("reminders.txt");
+	// Data Access Object for the Reminder class
+	static ReminderDAO reimnderDAO = new ReminderDAO();
+
+	private String id;
+	private String text;
 	
-	public static ArrayList<String> reminders = new ArrayList<>();
-
 	
-	/** Metoda koja skenira remindere s fajla */
-	public static void scanReminders() {
+    /** Returns reminder id */
+	public String getId() {
+		return id;
+	}
 
-		Scanner input;
-		try {
-			input = new Scanner(file);
-			while (input.hasNextLine()) {
-				reminders.add(input.nextLine());
-			}
-
-			
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+	/** Sets a new reminder id */
+	public void setId(String id) {
+		this.id = id;
 	}
 	
-	/** Metoda koja dodaje novi reminder */
-	public static void addReminder(){
-		
-		Scanner input = new Scanner(System.in);
-		System.out.print("  Enter the reminder you want to add: ");
-		reminders.add(input.nextLine());
-		
-		input.close();
+	/** Returns text of the reminder*/
+	public String getText() {
+		return text;
+	}
+
+	/** Sets a new text to the reminder */
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	/** No arg contructor */
+	public Reminder() {
+	}
+
+	/** Konstruktor with defined text */
+	public Reminder(String id, String text) {
+		this.id = id;
+		this.text = text;
 	}
 	
-	/** Metoda koja printa remindere na fajl */
-	public static void printReminders(){
-		
-		PrintWriter pw;
-		try {
-			pw = new PrintWriter(new FileOutputStream(file));
-			
-			for(String str: reminders)
-				pw.println(str);
-			
-			pw.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+	/** Overriden toString method */
+	public String toString(){
+		return " *** " + id + " " + text;
 	}
 
 }
